@@ -48,7 +48,6 @@ class DefaultController extends AbstractController
         ]);
     }
 
-
     public function mostPopularPOsts($number = 3)
     {
         $posts = ["post1", "post2", "post3", "post4"];
