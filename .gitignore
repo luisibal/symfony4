@@ -81,7 +81,7 @@ typings/
 .nuxt
 
 # react / gatsby 
-public/
+#public/
 
 # vuepress build output
 .vuepress/dist
@@ -152,5 +152,12 @@ public/
 ### Symfony Patch ###
 /web/css/
 /web/js/
+
+### Code ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 
 # End of https://www.gitignore.io/api/node,symfony
