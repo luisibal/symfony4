@@ -38,7 +38,7 @@ class DefaultController extends AbstractController
         // dump($user);
 
         $user1 = $em->getRepository(User::class)->findWithVideos(5);
-        dump($user1);
+        //dump($user1);
 
 
         return $this->render('default/index.html.twig', [
