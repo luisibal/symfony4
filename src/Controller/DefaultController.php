@@ -32,7 +32,7 @@ class DefaultController extends AbstractController
         //     $user->addVideo($video);
         //     $em->persist($video);
         // }
-        // $em->persist($user);
+        // $em->persist($user); aa
         // $em->flush();
         // $user = $em->getRepository(User::class)->find(5);
         // dump($user);
