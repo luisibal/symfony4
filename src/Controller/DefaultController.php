@@ -32,13 +32,13 @@ class DefaultController extends AbstractController
         //     $user->addVideo($video);
         //     $em->persist($video);
         // }
-        // $em->persist($user);
+        // $em->persist($user); aa
         // $em->flush();
         // $user = $em->getRepository(User::class)->find(5);
         // dump($user);
 
         $user1 = $em->getRepository(User::class)->findWithVideos(5);
-        //dump($user1);
+        dump($user1);
 
 
         return $this->render('default/index.html.twig', [
