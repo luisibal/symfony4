@@ -30,6 +30,17 @@ class AuthorRepository extends ServiceEntityRepository
             ->getQuery()->getOneOrNullResult();
     }
 
+    public function findByIdWithVideo($id)
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.id = :id')
+            ->setParameter('id', $id)
+            ->innerJoin('a.files', 'f')
+            ->andWhere('f INSTANCE OF App\Entity\Video')
+            ->addSelect('f') //eager loading
+            ->getQuery()->getOneOrNullResult();
+    }
+
     // /**
     //  * @return Author[] Returns an array of Author objects
     //  */

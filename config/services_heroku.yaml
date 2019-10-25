@@ -1,0 +1,6 @@
+imports:
+    - { resource: services.yaml }
+
+#override services section
+services:
+    App\Services\ServiceInterface: '@App\Services\MySecondService'
