@@ -2,22 +2,14 @@
 
 namespace App\Controller;
 
-use App\Entity\Address;
-use App\Entity\User;
-use App\Services\GiftsService;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Author;
-use App\Entity\Pdf;
-use App\Entity\Video;
-use App\Entity\File;
 use App\Services\ServiceInterface;
-use Psr\Container\ContainerInterface;
-use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+use Symfony\Component\Cache\Adapter\TagAwareAdapter;
 
 //this is a test pull request.
 class DefaultController extends AbstractController
@@ -25,8 +17,9 @@ class DefaultController extends AbstractController
     /**
      * @Route("/", name="default")
      */
-    public function index(ServiceInterface $service)
+    public function index(Request $request)
     {
+        dump($request);
         return $this->render('default/index.html.twig', []);
     }
 
