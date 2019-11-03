@@ -2,24 +2,31 @@
 
 namespace App\Controller;
 
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Services\ServiceInterface;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
-use Symfony\Component\Cache\Adapter\TagAwareAdapter;
+use App\Events\VideoCreatedEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use App\Form\VideoFormType;
 
 //this is a test pull request.
 class DefaultController extends AbstractController
 {
+    public function __construct(EventDispatcherInterface $dispatcher)
+    {
+        $this->dispatcher = $dispatcher;
+    }
+
     /**
      * @Route("/", name="default")
      */
     public function index(Request $request)
     {
-        dump($request);
+        $video = new \stdClass();
+        $video->title = 'funny movie';
+        $video->category = 'funny';
+        $event = new VideoCreatedEvent($video);
+        $this->dispatcher->dispatch('video.created.event', $event);
         return $this->render('default/index.html.twig', []);
     }
 
