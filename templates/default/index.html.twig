@@ -5,50 +5,48 @@
 {% endblock %}
 
 {% block body %}
-    <style>
-        .example-wrapper {
-            margin: 1em auto;
-            max-width: 800px;
-            width: 95%;
-            font: 18px / 1.5 sans-serif;
-        }
-        .example-wrapper code {
-            background: #F5F5F5;
-            padding: 2px 6px;
-        }
-    </style>
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
 
-    <div class="example-wrapper">
-        <h1>Hello {{' you '}}
-             ✅</h1>
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
 
-        This friendly message is coming from:
-        <ul>
-            <li>Your controller at
-                <code>
-                    <a href= ="{{ 'src/Controller/DefaultController.php'|file_link(0) }}">src/Controller/DefaultController.php</a>
-                </code>
-            </li>
-            <li>Your template at
-                <code>
-                    <a href= ="{{ 'templates/default/index.html.twig'|file_link(0) }}">templates/default/index.html.twig</a>
-                </code>
-            </li>
-        </ul>
+	<div class="example-wrapper">
+		<h1>Hello</h1>
+		This friendly message is coming from:
+		<ul>
+			<li>Your controller at
+				<code>
+					<a href== ="{{ 'src/Controller/DefaultController.php'|file_link(0) }}">src/Controller/DefaultController.php</a>
+				</code>
+			</li>
+			<li>Your template at
+				<code>
+					<a href== ="{{ 'templates/default/index.html.twig'|file_link(0) }}">templates/default/index.html.twig</a>
+				</code>
+			</li>
+		</ul>
+		{# {{ form(form) }} #}
 
-        {{dump()}}
-        
+			{# user is logged in #}
+			{% if app.user %}
+				<a href="{{path("logout")}}">logout</a>
+			{% endif %}
 
-        {# {{app.user}}
-            {{app.environment}}
-            {{dump(app.session)}}
-            {{app.request.get('param')}} #}
-
-        {{ render(controller(
-        'App\\Controller\\DefaultController::mostPopularPOsts', {'number': 5}
-    )) }}
-
-        {# {{ dump() }}  #}
-
-    </div>
-{% endblock %}
+			{% if is_granted('ROLE_ADMIN') %}
+				<a href="...">Delete something, only admin can do this
+				</a>
+			{% endif %}
+			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+				<p>Username: {{ app.user.username}}</p>
+			{% endif %}
+		</div>
+	{% endblock %}
