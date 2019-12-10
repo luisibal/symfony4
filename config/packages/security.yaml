@@ -17,22 +17,22 @@ security:
         main:
             anonymous: true
 
-            # form_login: 
-            #     login_path: login
-            #     check_path: login
-            #     username_parameter: 'email'
-            #     password_parameter: 'password'   
-            #     csrf_token_generator: security.csrf.token_manager             
+            form_login: 
+                login_path: login
+                check_path: login
+                username_parameter: 'email'
+                password_parameter: 'password'   
+                csrf_token_generator: security.csrf.token_manager             
             
-            # logout:
-            #     path: /logout #page to logout
-            #     target: /login #redirecting page
+            logout:
+                path: /logout #page to logout
+                target: /login #redirecting page
 
-            # remember_me:
-            #     secret: '%kernel.secret%'
-            #     lifetime: 604800 #1 week in seconds
-            #     #always_remember_me: true #always remember login (not checkbox req)
-            #     path: / #applies for entire web site
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800 #1 week in seconds
+                #always_remember_me: true #always remember login (not checkbox req)
+                path: / #applies for entire web site
 
 
             # activate different ways to authenticate
