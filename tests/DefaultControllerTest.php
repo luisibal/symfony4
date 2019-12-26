@@ -36,9 +36,11 @@ class DefaultControllerTest extends WebTestCase
 
         $this->assertTrue($this->client->getResponse()->isSuccessful());
 
-        $video = $this->entityManager->getRepository(Video::class)->find(3);
+        $video = $this->entityManager->getRepository(Video::class)->find(2);
         $this->entityManager->remove($video);
         $this->entityManager->flush();
+
+        $this->assertNull($this->entityManager->getRepository(Video::class)->find(2));
     }
 
     public function provideUrls()

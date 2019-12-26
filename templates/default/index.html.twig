@@ -34,8 +34,8 @@
 				</code>
 			</li>
 		</ul>
-		<a href="{{path('login')}}">awesome link</a>
-		{# {{ form(form) }} #}
+		<a href="{{path('login.pl')}}">awesome link</a>
+		{{ form(form) }}
 
 			{# user is logged in #}
 			{% if app.user %}
@@ -49,5 +49,16 @@
 			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 				<p>Username: {{ app.user.username}}</p>
 			{% endif %}
+		</div>
+		<div>
+			{% trans %}
+			some.key
+			{% endtrans %}
+			
+			{{ 'some.key'|trans|raw }}
+			{{ 'some.test'|trans|raw }}
+			
+			{{ 'symfony.learning'|transchoice(count) }}
+			
 		</div>
 	{% endblock %}

@@ -15,8 +15,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 // use App\Form\VideoFormType;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-
-
+use Symfony\Component\Translation\TranslatorInterface;
 
 //this is a test pull request.
 class DefaultController extends AbstractController
@@ -29,11 +28,19 @@ class DefaultController extends AbstractController
     /**
      * @Route("/home", name="home")
      */
-    public function index(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function index(Request $request, TranslatorInterface $translator)
     {
+
+        $translated = $translator->trans('some.key');
+        dump($request->getLocale()); //from services.yaml file
+        dump($translated); //translated string
+
         /*$em = $this->getDoctrine()->getManager();
-        $video = $em->getRepository(Video::class)->find(3);
-        $this->denyAccessUnlessGranted('VIDEO_DELETE', $video);
+        $EntitiyRepository = $em->getRepository(Video::class)->findAll();
+        dump($EntitiyRepository );*/
+        /*$em = $this->getDoctrine()->getManager();
+        $video = $em->getRepository(Video::class)->find(3);*/
+        // $this->denyAccessUnlessGranted('VIDEO_DELETE', $video);
 
         // dump($video);
 
@@ -44,43 +51,48 @@ class DefaultController extends AbstractController
         $form = $this->createForm(RegisterUserType::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword($passwordEncoder->encodePassword($user, $form->get('password')->getData()));
-            $user->setEmail($form->get('email')->getData());
-            $user->setRoles(['ROLE_ADMIN']);
-            $em = $this->getDoctrine()->getManager();
+        // if ($form->isSubmitted() && $form->isValid()) {
+        //     $user->setPassword($passwordEncoder->encodePassword($user, $form->get('password')->getData()));
+        //     $user->setEmail($form->get('email')->getData());
+        //     $user->setRoles(['ROLE_ADMIN']);
+        //     $em = $this->getDoctrine()->getManager();
 
-            // $video = new Video();
-            // $video->setTitle('video title');
-            // $video->setFile('video path');
-            // $video->setFilename('video 1');
-            // $video->setSize(1);
-            // $video->setDescription('descr');
-            // $video->setFormat('mp4');
-            // $video->setDuration(9);
-            // $video->setCreatedAt(new \DateTime());
-            // $em->persist($video);
-            // $user->addVideo($video);
+        //     $video = new Video();
+        //     $video->setTitle('video title');
+        //     $video->setFile('video path');
+        //     $video->setFilename('video 1');
+        //     $video->setSize(1);
+        //     $video->setDescription('descr');
+        //     $video->setFormat('mp4');
+        //     $video->setDuration(9);
+        //     $video->setCreatedAt(new \DateTime());
+        //     $em->persist($video);
+        //     $user->addVideo($video);
 
 
-            $em->persist($user);
-            $em->flush();
+        //     $em->persist($user);
+        //     $em->flush();
 
-            return $this->redirectToRoute('default');
-        }*/
+        //     return $this->redirectToRoute('home');
+        // }
 
         return $this->render('default/index.html.twig', [
-            //'form' => $form->createView()
+            'form' => $form->createView(),
+            'count' => 9
         ]);
     }
 
     /**
      * Login page
      *
-     * @Route("/login", name="login")
+     * @Route({
+     *  "en": "/login", 
+     *  "pl": "/otherRoute"
+     * }, name="login")
      */
-    public function login(AuthenticationUtils $authenticationUtils)
+    public function login(Request $request, AuthenticationUtils $authenticationUtils)
     {
+        dump($request->getLocale());
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
