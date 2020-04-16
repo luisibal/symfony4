@@ -30,7 +30,7 @@ class DefaultController extends AbstractController
      */
     public function index(Request $request, TranslatorInterface $translator)
     {
-
+        echo 'test';
         $translated = $translator->trans('some.key');
         dump($request->getLocale()); //from services.yaml file
         dump($translated); //translated string
